@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --forest: #162822;
+  --ink: #24312a;
+  --sage: #3f6a5c;
+  --sage-strong: #355a4f;
+  --mint: #78c4a8;
+  --mint-soft: #9ed4bf;
+  --paper: #f6f7f4;
+  --wash: #edf1ec;
+  --line: #dfe6df;
+  --muted: #62786d;
+  --clay: #8a4a42;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .audit-print-root,
+  .audit-print-root * {
+    visibility: visible;
+  }
+  .audit-print-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  .audit-no-print {
+    display: none !important;
+  }
+  @page {
+    size: letter;
+    margin: 0.5in;
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--line);
+  }
+
+  ::selection {
+    background: rgba(120, 196, 168, 0.35);
+  }
+
+  body {
+    background-color: var(--paper);
+    font-family: var(--font-serif), ui-serif, Georgia, "Times New Roman", serif;
+  }
+
+  .font-mono {
+    font-family: var(--font-mono), ui-monospace, "IBM Plex Mono", "Courier New", monospace;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
