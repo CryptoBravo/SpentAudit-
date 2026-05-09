@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, IBM_Plex_Mono } from "next/font/google";
+import { PostHogProvider } from "@/components/analytics/PostHogProvider";
 import "./globals.css";
 
 const serif = Cormorant_Garamond({
@@ -33,7 +34,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${serif.variable} ${mono.variable}`}>
-      <body className="min-h-screen bg-[var(--paper)] antialiased">{children}</body>
+      <body className="min-h-screen bg-[var(--paper)] antialiased">
+        <PostHogProvider>{children}</PostHogProvider>
+      </body>
     </html>
   );
 }

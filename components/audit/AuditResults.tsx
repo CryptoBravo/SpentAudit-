@@ -47,6 +47,11 @@ export function AuditResults({ data, onBack }: AuditResultsProps) {
     try {
       const trimmedEmail = email.trim();
 
+      track("email_submitted", {
+        wealthStep: content.slug,
+        region: data.region,
+      });
+
       try {
         const supabase = getSupabaseBrowserClient();
         const { error: insertError } = await supabase.from("audit_submissions").insert({
@@ -85,11 +90,12 @@ export function AuditResults({ data, onBack }: AuditResultsProps) {
         return;
       }
 
-      setEmailOk(true);
-      track("email_submitted", {
+      track("report_sent", {
         wealthStep: content.slug,
         region: data.region,
       });
+
+      setEmailOk(true);
     } finally {
       setEmailBusy(false);
     }
